@@ -1,6 +1,3 @@
--- OBJETIVO:
--- Clasificar a los clientes según la cantidad total de órdenes realizadas.
-
 SELECT
 	o.customerID AS ID_Cliente,
 	c.customerName AS Nombre_Cliente,
