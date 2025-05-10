@@ -1,6 +1,3 @@
--- OBJETIVO:
--- Mostrar cuánto gastó cada cliente en total, cruzando órdenes, productos y detalles.
-
 SELECT
 	o.customerID AS ID_Cliente,
 	c.customerName AS Nombre_Cliente,
