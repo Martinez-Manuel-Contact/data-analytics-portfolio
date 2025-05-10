@@ -1,6 +1,3 @@
--- OBJETIVO:
--- Comparar el precio de cada producto con el promedio de su categoría.
-
 SELECT
 	p.productName AS Nombre_Producto,
 	p.price AS Precio,
