@@ -39,7 +39,7 @@ Cada archivo SQL incluye comentarios detallados con el objetivo, herramientas ut
 Soy Manuel Martínez, en proceso de consolidarme como Data Analyst.  
 Este portfolio refleja mi capacidad para resolver consultas complejas, entender la lógica detrás de los datos y comunicar resultados de forma clara.
 
-📫 Contacto: [Tu LinkedIn o mail si querés agregarlo]
+📫 Contactos: contact.martinezmanuel@gmail.com / https://www.linkedin.com/in/manuel-martinez-5a3704361/ 
 
 ---
 
