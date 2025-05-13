@@ -1,0 +1,41 @@
+WITH ventas1997 AS (
+    SELECT
+        p.ProductID,
+        p.ProductName,
+        c.CategoryName,
+        c.CategoryID,
+        SUM(od.Quantity) AS Cantidad_Vendida
+    FROM OrderDetails od
+    INNER JOIN Products p ON od.ProductID = p.ProductID
+    INNER JOIN Categories c ON p.CategoryID = c.CategoryID
+    INNER JOIN Orders o ON od.OrderID = o.OrderID
+    WHERE YEAR(o.OrderDate) = 1997
+    GROUP BY p.ProductID, p.ProductName, c.CategoryName, c.CategoryID
+),
+ranking_top3 AS (
+    SELECT *,
+        RANK() OVER(PARTITION BY CategoryName ORDER BY Cantidad_Vendida DESC) AS Ranking_Categoria
+    FROM ventas1997
+),
+pais_top_por_producto AS (
+    SELECT
+        od.ProductID,
+        c.Country,
+        SUM(od.Quantity) AS TotalCantidad,
+        ROW_NUMBER() OVER(PARTITION BY od.ProductID ORDER BY SUM(od.Quantity) DESC) AS RN
+    FROM OrderDetails od
+    INNER JOIN Orders o ON od.OrderID = o.OrderID
+    INNER JOIN Customers c ON o.CustomerID = c.CustomerID
+    WHERE YEAR(o.OrderDate) = 1997
+    GROUP BY od.ProductID, c.Country
+)
+
+SELECT
+    rt3.ProductName,
+    rt3.CategoryName,
+    rt3.Cantidad_Vendida,
+    ptp.Country AS Pais_Cliente_Top
+FROM ranking_top3 rt3
+LEFT JOIN pais_top_por_producto ptp
+    ON rt3.ProductID = ptp.ProductID AND ptp.RN = 1
+WHERE rt3.Ranking_Categoria <= 3;
